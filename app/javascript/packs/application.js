@@ -8,7 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-// require('../../assets/stylesheets/application.scss')
+require("alpinejs")
 import '../../assets/stylesheets/application.scss'
 
 

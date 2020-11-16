@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# Devise for authentication
+gem "devise", "~> 4.7"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -32,11 +35,19 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'slim-rails'
 
 group :development, :test do
+  gem 'bullet'
+  gem 'dotenv-rails'
+  # Use letter opener to intercept emails locally
+  gem 'letter_opener'
+
   # Replaced byebug with pry
   gem 'pry'
 
   # Use rspec for tests
   gem 'rspec-rails'
+
+  #add faker for seeding
+  gem "faker", "~> 2.14"
 end
 
 group :development do
