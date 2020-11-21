@@ -13,7 +13,7 @@
           /! Heroicon name: menu
           svg.h-6.w-6 fill="none" stroke="currentColor" viewbox=("0 0 24 24") xmlns="http://www.w3.org/2000/svg"
             path d=("M4 6h16M4 12h16M4 18h16") stroke-linecap="round" stroke-linejoin="round" stroke-width="2" /
-      nav.hidden.md:flex.space-x-10
+      / nav.hidden.md:flex.space-x-10
         .relative x-data="{itemActive: false}"
           /! Item active: "text-gray-900", Item inactive: "text-gray-500"
           button.text-gray-500.group.inline-flex.items-center.space-x-2.text-base.leading-6.font-medium.hover:text-gray-900.focus:outline-none.focus:text-gray-900.transition.ease-in-out.duration-150 type="button" :class="{'text-gray-900': itemActive, 'text-gray-500': !itemActive}" @click="itemActive = !itemActive"
@@ -176,12 +176,20 @@
                   .text-sm.leading-5
                     a.font-medium.text-indigo-600.hover:text-indigo-500.transition.ease-in-out.duration-150 href="#"
                       | View all posts &rarr;
+
       .hidden.md:flex.items-center.justify-end.space-x-8.md:flex-1.lg:w-0
-        a.whitespace-no-wrap.text-base.leading-6.font-medium.text-gray-500.hover:text-gray-900.focus:outline-none.focus:text-gray-900 href="#"
-          | Sign in
-        span.inline-flex.rounded-md.shadow-sm
-          a.whitespace-no-wrap.inline-flex.items-center.justify-center.px-4.py-2.border.border-transparent.text-base.leading-6.font-medium.rounded-md.text-white.bg-indigo-600.hover:bg-indigo-500.focus:outline-none.focus:border-indigo-700.focus:shadow-outline-indigo.active:bg-indigo-700.transition.ease-in-out.duration-150 href="#"
-            | Sign up
+        - unless current_user.present?
+          = link_to new_user_session_path
+            .whitespace-no-wrap.text-base.leading-6.font-medium.text-gray-500.hover:text-gray-900.focus:outline-none.focus:text-gray-900
+              | Sign in
+          span.inline-flex.rounded-md.shadow-sm
+            = link_to new_user_registration_path
+              whitespace-no-wrap.inline-flex.items-center.justify-center.px-4.py-2.border.border-transparent.text-base.leading-6.font-medium.rounded-md.text-white.bg-indigo-600.hover:bg-indigo-500.focus:outline-none.focus:border-indigo-700.focus:shadow-outline-indigo.active:bg-indigo-700.transition.ease-in-out.duration-150
+                | Sign up
+        - else
+          = link_to destroy_user_session_path, method: :delete
+            whitespace-no-wrap.inline-flex.items-center.justify-center.px-4.py-2.border.border-transparent.text-base.leading-6.font-medium.rounded-md.text-white.bg-indigo-600.hover:bg-indigo-500.focus:outline-none.focus:border-indigo-700.focus:shadow-outline-indigo.active:bg-indigo-700.transition.ease-in-out.duration-150
+              | Sign out
   /!
     | Mobile menu, show/hide based on mobile menu state.
 
@@ -191,7 +199,7 @@
     | Leaving: "duration-100 ease-in"
     | From: "opacity-100 scale-100"
     | To: "opacity-0 scale-95"
-  .absolute.top-0.inset-x-0.p-2.transition.transform.origin-top-right.md:hidden
+  / .absolute.top-0.inset-x-0.p-2.transition.transform.origin-top-right.md:hidden
     .rounded-lg.shadow-lg
       .rounded-lg.shadow-xs.bg-white.divide-y-2.divide-gray-50
         .pt-5.pb-6.px-5.space-y-6
