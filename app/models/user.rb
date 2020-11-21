@@ -8,4 +8,7 @@ class User < ApplicationRecord
           :rememberable,
           :trackable,
           :validatable
+
+  has_many :blacklists
+
 end
