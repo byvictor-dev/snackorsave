@@ -81,6 +81,8 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.9.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
     faker (2.14.0)
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
@@ -141,6 +143,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 6.0.3.4)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -242,6 +248,7 @@ DEPENDENCIES
   bullet
   devise (~> 4.7)
   dotenv-rails
+  factory_bot (~> 6.1)
   faker (~> 2.14)
   jbuilder (~> 2.7)
   letter_opener
@@ -250,6 +257,7 @@ DEPENDENCIES
   pry
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
+  rails-controller-testing
   rename (~> 1.0)
   rspec-rails
   sass-rails (>= 6)
