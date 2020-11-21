@@ -5,7 +5,8 @@ class BlacklistedController < ApplicationController
 
     blacklist = Blacklist.find_by(
       user: User.find_by(api_token: api_token),
-      merchant_name: merchant_name
+      merchant_name: merchant_name,
+      blocked: true
     )
 
     blocked = true
