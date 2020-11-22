@@ -1,0 +1,32 @@
+.container.mx-auto
+  .max-w-5xl.mx-auto.py-6.sm:px-6.lg:px-8
+    .mt-3.grid.gap-5.grid-cols-3
+      .api-credentials.col-span-1.flex.shadow-md.rounded-md.border-solid.border-2.border-gray-300
+        .text-container.m-2.w-full
+          .title.w-full API Token:
+          .text.text-xs.gray-600.my-4.text-center.bg-yellow-100.p-1.rounded-md.border-solid.border-2.border-gray-300 = current_user.api_token
+          = link_to api_credential_path(current_user.id), method: :put
+            .button.relative.flex.justify-center.py-2.px-4.border.border-transparent.text-sm.font-medium.rounded-md.text-white.bg-indigo-600.hover:bg-indigo-700.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-indigo-500
+              | Regenerate
+      .api-snippet.col-span-2.flex.shadow-md.rounded-md.border-solid.border-2.border-gray-300
+        .text-container.m-2.w-full
+          .title.w-full Code Snippet:
+          .api-text-block
+            pre.bg-gray-700.text-white.mr-4.overflow-x-scroll.rounded-md.p-2
+              |
+                 const beforeTransaction = async (authorization) => {
+                   // create the url to call your api with only the merchant name and your user token
+                   url = `#{request.host}/blacklisted?user_api_token=#{@api_token}&merchant_name=merchant_name`
+
+                   // call the api with the url
+                   const response = await fetch(url, {
+                       method: 'GET',
+                       headers: {'Content-Type': 'application/json'}
+                   });
+
+                   // approve or block the transaction based on the response
+                   return await response.json().authorized;
+                   // const json = await response.json();
+                   // console.log(json.args);
+                   // return json.authorized;
+                 };
