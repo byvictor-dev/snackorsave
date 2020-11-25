@@ -8,13 +8,7 @@ module.exports = {
     // standardFontWeights: true
   },
   purge: [],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
-      }
-    }
-  },
+  theme: {},
   variants: {},
   plugins: [
     require('@tailwindcss/ui')
