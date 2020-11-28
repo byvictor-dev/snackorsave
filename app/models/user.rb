@@ -10,5 +10,6 @@ class User < ApplicationRecord
           :validatable
 
   has_many :blacklists
+  has_many :transaction_attempts
 
 end

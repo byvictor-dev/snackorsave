@@ -3,7 +3,7 @@ class CreateBlacklists < ActiveRecord::Migration[6.0]
     create_table :blacklists do |t|
       t.boolean :blocked, default: true
       t.integer :user_id
-      t.string  :merchant_name
+      t.string  :category
       t.string  :title
 
       t.timestamps
