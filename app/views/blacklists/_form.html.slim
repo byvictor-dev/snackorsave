@@ -8,7 +8,7 @@
 
     = form_for(blacklist, url: url, class: 'mt-8 space-y-6') do |f|
       / form.mt-8.space-y-6 action="#" method="POST"
-      .rounded-md.shadow-sm.-space-y-px
+      .rounded-md.shadow-sm
         div
           = f.label 'Title', class: 'sr-only', for: 'blacklist_title'
           = f.text_field :title,
@@ -19,28 +19,19 @@
                           type: 'text',
                           value: blacklist.title
         div
-          = f.label 'Merchant Name', class: 'sr-only', for: 'blacklist_merchant_name'
-          = f.text_field  :merchant_name,
-                          class: 'appearance-none  rounded-none  relative  block  w-full  px-3  py-2  border  border-gray-300  placeholder-gray-500  text-gray-900  rounded-b-md  focus:outline-none  focus:ring-indigo-500  focus:border-indigo-500  focus:z-10  sm:text-sm',
-                          placeholder: 'Merchant Name',
-                          required: true,
-                          type: 'text',
-                          value: blacklist.merchant_name
-        div
           = f.label 'Merchant Category', class: 'sr-only', for: 'blacklist_merchant_category'
-          = f.text_field :merchant_category,
-                         class: 'appearance-none  rounded-none  relative  block  w-full  px-3  py-2  border  border-gray-300  placeholder-gray-500  text-gray-900  rounded-b-md  focus:outline-none  focus:ring-indigo-500  focus:border-indigo-500  focus:z-10  sm:text-sm',
-                         placeholder: 'Merchant Name',
-                         required: true,
-                         type: 'text',
-                         value: blacklist.merchant_category
+          = f.collection_select :merchant_category_id, MerchantCategory.all, :id, :description,
+                                {prompt: "Merchant Category"},
+                                class: 'block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border border-gray-300 rounded-b-md px-3 py-2 text-gray-900',
+                                required: true,
+                                value: blacklist.merchant_category_id
         div.py-4
           .flex.items-center.justify-between
             .flex.items-center
               = f.check_box :blocked,
                             class: 'h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded',
                             value: blacklist.blocked
-              = f.label 'Blocked', class: 'ml-2block text-sm text-gray-900', for: 'blacklist_blocked'
+              = f.label 'Blocked', class: 'ml-2block text-sm text-gray-900 px-3', for: 'blacklist_blocked'
 
 
       div
