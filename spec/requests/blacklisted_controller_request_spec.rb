@@ -60,6 +60,13 @@ RSpec.describe BlacklistedController, type: :request do
 
             expect(JSON.parse(response.body)).to eq({'authorized' => true})
           end
+
+          it 'should respond with {authorized: false} on second request after 15 minutes' do
+            transaction_attempt.update(created_at: 20.minutes.ago, updated_at: 20.minutes.ago)
+            get_is_blacklisted
+
+            expect(JSON.parse(response.body)).to eq({'authorized' => false})
+          end
         end
 
         context 'category is not blocked' do
