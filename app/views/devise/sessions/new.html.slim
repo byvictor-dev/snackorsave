@@ -1,24 +1,4 @@
-/ h2
-/   | Log in
-/ = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-/   .field
-/     = f.label :email
-/     br
-/     = f.email_field :email, autofocus: true, autocomplete: "email"
-/   .field
-/     = f.label :password
-/     br
-/     = f.password_field :password, autocomplete: "current-password"
-/   - if devise_mapping.rememberable?
-/     .field
-/       = f.check_box :remember_me
-/       = f.label :remember_me
-/   .actions
-/     = f.submit "Log in"
-/ = render "devise/shared/links"
-/
-
-.min-h-screen.flex.items-center.justify-center.bg-gray-50.py-12.px-4.sm:px-6.lg:px-8
+.h-full.flex.items-center.justify-center.bg-gray-50.py-12.px-4.sm:px-6.lg:px-8
   .max-w-md.w-full.space-y-8
     div
       img.mx-auto.h-12.w-auto alt="Workflow" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" /

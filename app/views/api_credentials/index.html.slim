@@ -16,19 +16,17 @@
           .api-text-block
             pre.bg-gray-700.text-white.mr-4.overflow-x-scroll.rounded-md.p-2
               |
-                 const beforeTransaction = async (authorization) => {
-                   // create the url to call your api with only the merchant name and your user token
-                   url = `#{request.host}/blacklisted?user_api_token=#{@api_token}&merchant_name=merchant_name`
+                const beforeTransaction = async (authorization) => {
+                  // create the url to call your api with only the merchant name and your user token
+                  url = `#{request.host}/blacklisted?user_api_token=#{@api_token}&merchant_name=${authorization.merchant.name}`
 
-                   // call the api with the url
-                   const response = await fetch(url, {
-                       method: 'GET',
-                       headers: {'Content-Type': 'application/json'}
-                   });
+                  // call the api with the url
+                  const response = await fetch(url, {
+                      method: 'GET',
+                      headers: {'Content-Type': 'application/json'}
+                  });
 
-                   // approve or block the transaction based on the response
-                   return await response.json().authorized;
-/                   // const json = await response.json();
-/                   // console.log(json.args);
-/                   // return json.authorized;
-                 };
+                  // approve or block the transaction based on the response
+                  const json = await response.json();
+                  return json.authorized;
+                };
