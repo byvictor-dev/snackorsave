@@ -5,28 +5,29 @@ class BlacklistedController < ApplicationController
     render_error_response(403) and return unless @user.present?
     render json: {authorized: true} and return unless blocked_category?
 
-    record = get_transaction_record(user)
-
-    render json: {authorized: !record.new_record?}
+    record = get_transaction_record
+    authorized = !record.new_record?
     record.save
+
+    render json: {authorized: authorized}
   end
 
 
   private
 
-    def get_transaction_record(user)
+    def get_transaction_record
       TransactionAttempt.where(
         created_at: 15.minutes.ago..DateTime.now
       ).find_or_initialize_by(
-        user: user,
-        amount: @amount,
-        category_id: @category,
-        merchant_name: @merchant_name
+        user: @user,
+        amount: params[:amount],
+        category_id: params[:category],
+        merchant_name: params[:merchant_name]
       )
     end
 
     def blocked_category?
-      Blacklist.find_by(user: user, category: @category)&.blocked
+      Blacklist.find_by(user: @user, category_id: params[:category])&.blocked
     end
 
     def render_error_response(status)
@@ -37,8 +38,8 @@ class BlacklistedController < ApplicationController
       @user = User.find_by(api_token: params[:user_api_token])
     end
 
-    def trnsaction_attempt_params
-      params.permit(:amount, :category, :merchant_name).merge(user_id: @user.id)
+    def transaction_attempt_params
+      params.permit(:amount, :merchant_name).merge(user_id: @user.id)
     end
 
 end
