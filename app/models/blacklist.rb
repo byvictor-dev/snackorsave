@@ -6,7 +6,7 @@ class Blacklist < ApplicationRecord
 
   #### Validations
   validates :user_id,
-            :merchant_name,
+            :category_id,
             presence: true
 
 end

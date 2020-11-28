@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_11_28_125139) do
   create_table "blacklists", force: :cascade do |t|
     t.boolean "blocked", default: true
     t.integer "user_id"
-    t.string "category"
+    t.integer "category_id"
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
