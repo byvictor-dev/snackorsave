@@ -3,7 +3,7 @@ class BlacklistsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @blacklists = current_user.blacklists
+    @blacklists = current_user.blacklists.includes(:merchant_category)
   end
 
   def new
