@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 2020_11_28_120847) do
 
   create_table "transaction_attempts", force: :cascade do |t|
     t.integer "amount"
-    t.string "merchant_name"
-    t.string "category"
+    t.integer "category_id"
     t.integer "user_id"
+    t.string "merchant_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
