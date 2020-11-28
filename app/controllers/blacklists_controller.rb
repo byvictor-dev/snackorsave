@@ -32,6 +32,6 @@ class BlacklistsController < ApplicationController
   private
 
     def blacklist_params
-      params.require(:blacklist).permit(:id, :blocked, :title, :merchant_name)
+      params.require(:blacklist).permit(:id, :blocked, :title, :merchant_name, :merchant_category_id)
     end
 end
