@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_105110) do
+ActiveRecord::Schema.define(version: 2020_11_28_120847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -22,8 +22,17 @@ ActiveRecord::Schema.define(version: 2020_11_21_105110) do
   create_table "blacklists", force: :cascade do |t|
     t.boolean "blocked", default: true
     t.integer "user_id"
-    t.string "merchant_name"
+    t.string "category"
     t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transaction_attempts", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "category_id"
+    t.integer "user_id"
+    t.string "merchant_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
