@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe BlacklistedController, type: :request do
-  let!(:user)                { create(:user).reload }
-  let!(:blocked_blacklist)   { create :blacklist, user: user, category_id: 1 }
-  let!(:unblocked_blacklist) { create :blacklist, user: user, category_id: 2, blocked: false }
-  let(:get_is_blacklisted)   { get is_blacklisted_path, params: params }
+  let!(:user)                 { create(:user).reload }
+  let(:unblocked_category)    { create :merchant_category, description: 'potatoes' }
+  let!(:blocked_blacklist)    { create :blacklist, user: user }
+  let!(:unblocked_blacklist)  { create :blacklist, user: user, merchant_category: unblocked_category, blocked: false }
+  let(:get_is_blacklisted)    { get is_blacklisted_path, params: params }
 
   describe 'GET is_blacklisted' do
     context 'user does not exist' do
@@ -32,7 +33,7 @@ RSpec.describe BlacklistedController, type: :request do
       context 'blacklist exists' do
         context 'category is blocked' do
           let(:transaction_attempt) { create :transaction_attempt,
-            category_id: 1,
+            merchant_category: blocked_blacklist.merchant_category,
             user: user,
             amount: 15000,
             merchant_name: 'The Lord of War'
@@ -41,7 +42,7 @@ RSpec.describe BlacklistedController, type: :request do
           let(:params) {
             {
               user_api_token: user.api_token,
-              category: 1,
+              category: blocked_blacklist.merchant_category.description,
               amount: 15000,
               merchant_name: 'The Lord of War'
             }
@@ -65,7 +66,7 @@ RSpec.describe BlacklistedController, type: :request do
           let(:params) {
             {
               user_api_token: user.api_token,
-              category: 2,
+              category: unblocked_category,
               amount: 15000,
               merchant_name: 'The Lord of War'
             }
