@@ -1,9 +1,8 @@
 class BlacklistedController < ApplicationController
-  before_action :api_token, :category, :merchant_name
+  before_action :find_user
 
   def is_blacklisted
-    user = User.find_by(api_token: @api_token)
-    render_error_response(403) and return unless user.present?
+    render_error_response(403) and return unless @user.present?
     render json: {authorized: true} and return unless blocked_category?
 
     record = get_transaction_record(user)
@@ -20,6 +19,7 @@ class BlacklistedController < ApplicationController
         created_at: 15.minutes.ago..DateTime.now
       ).find_or_initialize_by(
         user: user,
+        amount: @amount,
         category: @category,
         merchant_name: @merchant_name
       )
@@ -33,15 +33,12 @@ class BlacklistedController < ApplicationController
       render json: {}, status: status
     end
 
-    def api_token
-      @api_token ||= params[:user_api_token]
+    def find_user
+      @user = User.find_by(api_token: params[:user_api_token])
     end
 
-    def category
-      @category ||= params[:category]
+    def trnsaction_attempt_params
+      params.permit(:amount, :category, :merchant_name).merge(user_id: @user.id)
     end
 
-    def merchant_name
-      @merchant_name ||= params[:merchant_name]
-    end
 end

@@ -3,7 +3,7 @@ class CreateTransactionAttempts < ActiveRecord::Migration[6.0]
     create_table :transaction_attempts do |t|
       t.integer :amount
       t.string  :merchant_name
-      t.string  :category
+      t.integer :category_id
       t.integer :user_id
 
       t.timestamps
