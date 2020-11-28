@@ -19,13 +19,21 @@
                           type: 'text',
                           value: blacklist.title
         div
-          = f.label 'Merchant Name', class: 'sr-only', for: "user_password"
+          = f.label 'Merchant Name', class: 'sr-only', for: 'blacklist_merchant_name'
           = f.text_field  :merchant_name,
                           class: 'appearance-none  rounded-none  relative  block  w-full  px-3  py-2  border  border-gray-300  placeholder-gray-500  text-gray-900  rounded-b-md  focus:outline-none  focus:ring-indigo-500  focus:border-indigo-500  focus:z-10  sm:text-sm',
                           placeholder: 'Merchant Name',
                           required: true,
                           type: 'text',
                           value: blacklist.merchant_name
+        div
+          = f.label 'Merchant Category', class: 'sr-only', for: 'blacklist_merchant_category'
+          = f.text_field :merchant_category,
+                         class: 'appearance-none  rounded-none  relative  block  w-full  px-3  py-2  border  border-gray-300  placeholder-gray-500  text-gray-900  rounded-b-md  focus:outline-none  focus:ring-indigo-500  focus:border-indigo-500  focus:z-10  sm:text-sm',
+                         placeholder: 'Merchant Name',
+                         required: true,
+                         type: 'text',
+                         value: blacklist.merchant_category
         div.py-4
           .flex.items-center.justify-between
             .flex.items-center

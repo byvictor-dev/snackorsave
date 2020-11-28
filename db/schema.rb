@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_120847) do
+ActiveRecord::Schema.define(version: 2020_11_28_125139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2020_11_28_120847) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "merchant_categories_id"
+    t.index ["merchant_categories_id"], name: "index_blacklists_on_merchant_categories_id"
+  end
+
+  create_table "merchant_categories", force: :cascade do |t|
+    t.string "description", null: false
   end
 
   create_table "transaction_attempts", force: :cascade do |t|
@@ -61,4 +67,5 @@ ActiveRecord::Schema.define(version: 2020_11_28_120847) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blacklists", "merchant_categories", column: "merchant_categories_id"
 end
