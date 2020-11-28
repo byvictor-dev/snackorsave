@@ -70,3 +70,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rename", "~> 1.0"
+
+gem 'sib-api-v3-sdk'
