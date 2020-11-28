@@ -2,7 +2,7 @@ FactoryBot.define do
 
   factory :blacklist do
     title { Faker::Company.bs }
-    category { 'Bakery' }
+    category { 1 }
     blocked { true }
     user { create :user }
   end

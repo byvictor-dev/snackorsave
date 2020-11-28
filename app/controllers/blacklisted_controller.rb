@@ -20,7 +20,7 @@ class BlacklistedController < ApplicationController
       ).find_or_initialize_by(
         user: user,
         amount: @amount,
-        category: @category,
+        category_id: @category,
         merchant_name: @merchant_name
       )
     end
