@@ -22,12 +22,11 @@ ActiveRecord::Schema.define(version: 2020_11_28_125139) do
   create_table "blacklists", force: :cascade do |t|
     t.boolean "blocked", default: true
     t.integer "user_id"
-    t.integer "category_id"
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "merchant_categories_id"
-    t.index ["merchant_categories_id"], name: "index_blacklists_on_merchant_categories_id"
+    t.bigint "merchant_category_id"
+    t.index ["merchant_category_id"], name: "index_blacklists_on_merchant_category_id"
   end
 
   create_table "merchant_categories", force: :cascade do |t|
@@ -36,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_11_28_125139) do
 
   create_table "transaction_attempts", force: :cascade do |t|
     t.integer "amount"
-    t.integer "category_id"
+    t.integer "merchant_category_id"
     t.integer "user_id"
     t.string "merchant_name"
     t.datetime "created_at", precision: 6, null: false
@@ -67,5 +66,5 @@ ActiveRecord::Schema.define(version: 2020_11_28_125139) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "blacklists", "merchant_categories", column: "merchant_categories_id"
+  add_foreign_key "blacklists", "merchant_categories"
 end
