@@ -16,7 +16,7 @@
               |
                 const beforeTransaction = async (authorization) => {
                   // create the url to call your api with only the merchant name and your user token
-                  url = `#{request.protocol}#{request.host}/blacklisted?user_api_token=#{@api_token}&merchant_name=${authorization.merchant.name}&category=${authorization.merchant.category.name}&amount={authorization.centsAmount}`
+                  url = `#{request.protocol}#{request.host}/blacklisted?user_api_token=#{@api_token}&merchant_name=${authorization.merchant.name}&category=${authorization.merchant.category.name}&amount=${authorization.centsAmount}`
                   // call the api with the url
                   const response = await fetch(url, {
                       method: 'GET',
